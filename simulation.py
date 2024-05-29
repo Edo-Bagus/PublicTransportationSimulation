@@ -1,5 +1,6 @@
 import pygame
 import sys
+import random
 
 # Initialize Pygame
 pygame.init()
@@ -13,7 +14,7 @@ ROWS = SCREEN_HEIGHT // GRID_SIZE
 
 # Colors
 WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
+BLACK = (40, 40, 40)
 ROAD_COLOR = (128, 128, 128)
 NOT_ROAD_COLOR = (255, 0, 0)
 
@@ -33,7 +34,7 @@ def draw_grid():
             else:
                 color = NOT_ROAD_COLOR
             pygame.draw.rect(screen, color, (col * GRID_SIZE, row * GRID_SIZE, GRID_SIZE, GRID_SIZE))
-            pygame.draw.rect(screen, BLACK, (col * GRID_SIZE, row * GRID_SIZE, GRID_SIZE, GRID_SIZE), 1)
+            # pygame.draw.rect(screen, WHITE, (col * GRID_SIZE, row * GRID_SIZE, GRID_SIZE, GRID_SIZE), 1)
 
 # Car class
 class Car(pygame.sprite.Sprite):
@@ -42,11 +43,11 @@ class Car(pygame.sprite.Sprite):
         self.image = pygame.Surface((GRID_SIZE, GRID_SIZE))
         self.image.fill((0, 255, 0))
         self.rect = self.image.get_rect()
-        self.rect.x = x * GRID_SIZE
-        self.rect.y = y * GRID_SIZE
+        self.rect.x = x * GRID_SIZE  # Mengkonversi posisi x dari grid cells ke piksel
+        self.rect.y = y * GRID_SIZE  # Mengkonversi posisi y dari grid cells ke piksel
         self.initspeed = speed
-        self.speed = speed  # Speed of the car
-        self.direction = (1, 0)  # Initial direction (right)
+        self.speed = speed  # Kecepatan awal mobil
+        self.direction = (1, 0)  # Arah awal (ke kanan)
 
     def update(self, other_cars):
         # Check for other cars in the same lane and in front of this car
@@ -69,12 +70,38 @@ class Car(pygame.sprite.Sprite):
         self.rect.x = (self.rect.x + self.dx) % SCREEN_WIDTH
         self.rect.y = (self.rect.y + self.dy) % SCREEN_HEIGHT
 
-for i in range(40):
-    grid[5][i] = "road"
+start_row = 4
+end_row = 26
+start_col = 4
+end_col = 36
 
-# Create cars
-car1 = Car(5, 5, 5)  # Starting position for car 1
-car2 = Car(15, 5, 2)  # Starting position for car 2
+# Define road paths
+for i in range(start_col, end_col):
+    grid[4][i] = "road"
+    grid[25][i] = "road"
+    grid[ROWS//2][i] = "road"
+
+for i in range(start_row, end_row):
+    grid[i][4] = "road"
+    grid[i][35] = "road"
+    grid[i][COLUMNS//2] = "road"
+
+# Function to find a random road cell
+def find_road():
+    road_cells = []
+    for i in range(ROWS):
+        for j in range(COLUMNS):
+            if grid[i][j] == "road":
+                road_cells.append((i, j))
+    return random.choice(road_cells)
+
+# Find initial positions for cars on the road
+car1_pos = find_road()
+car2_pos = find_road()
+
+# Create cars at the found positions
+car1 = Car(car1_pos[1], car1_pos[0], 5)  # Menggunakan posisi acak di jalan dan kecepatan 5
+car2 = Car(car2_pos[1], car2_pos[0], 2)  # Menggunakan posisi acak di jalan dan kecepatan 2
 
 # All sprites group
 all_sprites = pygame.sprite.Group()
@@ -99,7 +126,6 @@ while running:
 
     # Draw all sprites
     all_sprites.draw(screen)
-    print(car1.dx)
 
     # Update the display
     pygame.display.flip()
