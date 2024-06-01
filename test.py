@@ -70,12 +70,17 @@ sim.connect_segment(12, [4])
 #     })
 # sim.add_vehicle_generator(vg) 
 
-vehicle = Vehicle({'path': [0], 'v': 0, 'v_max': 5, 'x': 50})
-vehicle2 = Vehicle({'path': [2], 'v': 16.6, 'l': 4})
-vehicle3 = Vehicle({'path': [1], 'v': 16.6})
-sim.add_vehicle(vehicle)
-sim.add_vehicle(vehicle2)
-sim.add_vehicle(vehicle3)
+# vehicle = Vehicle({'path': [0], 'v': 0, 'v_max': 5, 'x': 50})
+# vehicle2 = Vehicle({'path': [2], 'v': 16.6, 'l': 4})
+# vehicle3 = Vehicle({'path': [1], 'v': 16.6})
+# sim.add_vehicle(vehicle)
+# sim.add_vehicle(vehicle2)
+# sim.add_vehicle(vehicle3)
+
+#input the number of people in the city
+sim.gen_npc(21)
+
+
 
 win = Window(sim)
 win.run()

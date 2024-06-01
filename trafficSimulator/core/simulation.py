@@ -5,6 +5,7 @@ from .geometry.segment import Segment
 from .vehicle import Vehicle
 from .trafficSignal import TrafficSignal
 import random
+import math
 
 
 class Simulation:
@@ -48,6 +49,17 @@ class Simulation:
     def connect_segment(self, segment_index, connected_segments_index):
         for seg_index in connected_segments_index:
             self.segments[segment_index].connected_segments.append(seg_index)
+
+    def gen_npc(self, total_people):
+        car_count = math.ceil(total_people / 4)
+        for i in range(car_count):
+            car_config = {}
+            random_segment_index = random.randint(0, len(self.segments))
+            car_config['path'] = [random_segment_index]
+            car_config['v'] = 10
+            car_config['x'] = random.uniform(0, self.segments[random_segment_index].get_length())
+            veh = Vehicle(car_config)
+            self.add_vehicle(veh)
 
 
     def create_quadratic_bezier_curve(self, start, control, end):
