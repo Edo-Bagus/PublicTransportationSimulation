@@ -51,6 +51,7 @@ sim.create_signal([[0], [1], [2], [3]])
 
 
 
+
 v = Vehicle({'path': [1, 13, 6, 20, 21, 22, 23, 24], 'x': 20, 'v':16.6})
 sim.add_vehicle(v)
 

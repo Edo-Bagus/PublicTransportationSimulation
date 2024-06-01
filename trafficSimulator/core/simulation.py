@@ -4,6 +4,7 @@ from .geometry.cubic_curve import CubicCurve
 from .geometry.segment import Segment
 from .vehicle import Vehicle
 from .trafficSignal import TrafficSignal
+import random
 
 
 class Simulation:
@@ -43,6 +44,10 @@ class Simulation:
         sig = TrafficSignal(segments, config)
         self.traffic_signals.append(sig)
         return sig
+    
+    def connect_segment(self, segment_index, connected_segments_index):
+        for seg_index in connected_segments_index:
+            self.segments[segment_index].connected_segments.append(seg_index)
 
 
     def create_quadratic_bezier_curve(self, start, control, end):
@@ -114,13 +119,13 @@ class Simulation:
             if vehicle.x >= segment.get_length():
                 
                 # If vehicle has a next road
-                if vehicle.current_road_index + 1 < len(vehicle.path):
-                    # Update current road to next road
-                    vehicle.current_road_index += 1
-                else:
-                    vehicle.current_road_index = 0
+                # if vehicle.current_road_index + 1 < len(vehicle.path):
+                #     # Update current road to next road
+                #     vehicle.current_road_index += 1
+                # else:
+                #     vehicle.current_road_index = 0
                     # Add it to the next road
-                next_road_index = vehicle.path[vehicle.current_road_index]
+                next_road_index = random.choice(segment.connected_segments)
                 self.segments[next_road_index].vehicles.append(vehicle_id)
                 # Reset vehicle properties
                 vehicle.x = 0

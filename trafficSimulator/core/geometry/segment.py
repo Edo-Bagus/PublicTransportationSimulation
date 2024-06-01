@@ -14,6 +14,7 @@ class Segment(ABC):
         self.slowDistance = 40
         self.stopDistance = 20
         self.has_traffic_signal = False
+        self.connected_segments = []
 
         self.set_functions()
         
