@@ -110,7 +110,7 @@ class Simulation:
             vehicle_id = segment.vehicles[0]
             vehicle = self.vehicles[vehicle_id]
             # If first vehicle is out of road bounds
-            print('x:', vehicle.x)
+            # print('x:', vehicle.x)
             if vehicle.x >= segment.get_length():
                 
                 # If vehicle has a next road

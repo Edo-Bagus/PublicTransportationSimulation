@@ -266,6 +266,13 @@ class Window:
     def draw_segments(self):
         for segment in self.simulation.segments:
             dpg.draw_polyline(segment.points, color=(180, 180, 220), thickness=3.5*self.zoom, parent="Canvas")
+        
+        for segment in self.simulation.segments:
+            if segment.has_traffic_signal:
+                if segment.traffic_signal_state:
+                    dpg.draw_circle(segment.points[1], 1.5, color=(0, 200, 0), thickness=3.5*self.zoom, parent='Canvas')
+                else:
+                    dpg.draw_circle(segment.points[1], 1.5, color=(200, 0, 0), thickness=3.5*self.zoom, parent='Canvas')
             # dpg.draw_arrow(segment.points[-1], segment.points[-2], thickness=0, size=2, color=(0, 0, 0, 50), parent="Canvas")
 
     def draw_vehicles(self):

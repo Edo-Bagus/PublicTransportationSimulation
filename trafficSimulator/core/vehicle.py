@@ -16,7 +16,7 @@ class Vehicle:
     def set_default_config(self):    
         self.id = uuid.uuid4()
 
-        self.l = 8
+        self.l = 4
         self.s0 = 4
         self.T = 1
         self.v_max = 16.6
