@@ -52,14 +52,29 @@ class Simulation:
 
     def gen_npc(self, total_people):
         car_count = math.ceil(total_people / 4)
+        segment_index = 0
+        spawn_margin = 0
         for i in range(car_count):
             car_config = {}
-            random_segment_index = random.randint(0, len(self.segments))
-            car_config['path'] = [random_segment_index]
-            car_config['v'] = 10
-            car_config['x'] = random.uniform(0, self.segments[random_segment_index].get_length())
+            # random_segment_index = random.randint(0, len(self.segments) - 1)
+            # random_spawn_x = random.uniform(0, self.segments[random_segment_index].get_length())
+            # if len(self.segments[random_segment_index]) == 0:
+            #     car_config['x'] = random_spawn_x
+            # else:
+            #     for spawn_choice in self.segments[random_segment_index].chosen_spawn_x:
+            #         if random_spawn_x >= spawn_choice and random_spawn_x <= spawn_choice + 20:
+
+            car_config['path'] = [segment_index]
+            car_config['v'] = 0
+            # spawn_choice = [0, self.segments[random_segment_index].
+            car_config['x'] = self.segments[segment_index].get_length() - spawn_margin
             veh = Vehicle(car_config)
             self.add_vehicle(veh)
+            if segment_index < len(self.segments) - 1:
+                segment_index += 1
+            else:
+                segment_index = 0
+                spawn_margin += 10
 
 
     def create_quadratic_bezier_curve(self, start, control, end):

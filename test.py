@@ -23,6 +23,8 @@ sim.create_segment((170, -80), (170, 100))
 sim.create_quadratic_bezier_curve((170, 100), (170, 120), (150, 120))
 sim.create_segment((150, 120), (100, 120))
 
+# sim.create_segment((-150, -100), (100, -100))
+
 sim.connect_segment(0, [1, 8])
 sim.connect_segment(1, [2])
 sim.connect_segment(2, [3])
@@ -36,6 +38,7 @@ sim.connect_segment(9, [10])
 sim.connect_segment(10, [11])
 sim.connect_segment(11, [12])
 sim.connect_segment(12, [4])
+# sim.connect_segment(13, [0])
 
 # Intersection in
 # sim.create_segment((lane_space/2, length+intersection_size/2), (lane_space/2, intersection_size/2))
@@ -65,20 +68,20 @@ sim.connect_segment(12, [4])
 
 # vg = VehicleGenerator({
 #     'vehicles': [
-#         (1, {'path': [0, 1, 2, 3, 4, 5, 6, 7], 'v': 16.6})
+#         (1, {'path': [13], 'v': 16.6})
 #         ]
 #     })
 # sim.add_vehicle_generator(vg) 
 
-# vehicle = Vehicle({'path': [0], 'v': 0, 'v_max': 5, 'x': 50})
-# vehicle2 = Vehicle({'path': [2], 'v': 16.6, 'l': 4})
+# vehicle = Vehicle({'path': [0], 'v': 0, 'x': 6})      
+# vehicle2 = Vehicle({'path': [0], 'v': 0, 'x': 0})
 # vehicle3 = Vehicle({'path': [1], 'v': 16.6})
 # sim.add_vehicle(vehicle)
 # sim.add_vehicle(vehicle2)
 # sim.add_vehicle(vehicle3)
 
 #input the number of people in the city
-sim.gen_npc(21)
+sim.gen_npc(100)
 
 
 

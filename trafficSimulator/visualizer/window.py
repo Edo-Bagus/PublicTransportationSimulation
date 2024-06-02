@@ -281,6 +281,12 @@ class Window:
                 vehicle = self.simulation.vehicles[vehicle_id]
                 progress = vehicle.x / segment.get_length()
 
+                if progress > 1:
+                    progress = 1
+
+                if progress < 0:
+                    progress = 0
+
                 position = segment.get_point(progress)
                 heading = segment.get_heading(progress)
 

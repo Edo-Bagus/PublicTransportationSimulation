@@ -64,7 +64,7 @@ sim.connect_segment(4, [1])
 # v = Vehicle({'path': [0, 12, 5]})
 # sim.add_vehicle(v)
 
-sim.gen_npc(17)
+sim.gen_npc(100)
 
 win = Window(sim)
 win.run()
