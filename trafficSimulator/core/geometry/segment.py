@@ -15,6 +15,7 @@ class Segment(ABC):
         self.stopDistance = 20
         self.has_traffic_signal = False
         self.connected_segments = []
+        # self.is_full = False
 
         self.set_functions()
         

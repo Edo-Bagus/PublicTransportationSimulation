@@ -12,27 +12,27 @@ length = 100
 sim.create_segment((lane_space/2, length+intersection_size/2), (lane_space/2, intersection_size/2))
 sim.create_segment((length+intersection_size/2, -lane_space/2), (intersection_size/2, -lane_space/2))
 sim.create_segment((-lane_space/2, -length-intersection_size/2), (-lane_space/2, -intersection_size/2))
-sim.create_segment((-length-intersection_size/2, lane_space/2), (-intersection_size/2, lane_space/2))
+# sim.create_segment((-length-intersection_size/2, lane_space/2), (-intersection_size/2, lane_space/2))
 # Intersection out
 sim.create_segment((-lane_space/2, intersection_size/2), (-lane_space/2, length+intersection_size/2))
 sim.create_segment((intersection_size/2, lane_space/2), (length+intersection_size/2, lane_space/2))
 sim.create_segment((lane_space/2, -intersection_size/2), (lane_space/2, -length-intersection_size/2))
-sim.create_segment((-intersection_size/2, -lane_space/2), (-length-intersection_size/2, -lane_space/2))
+# sim.create_segment((-intersection_size/2, -lane_space/2), (-length-intersection_size/2, -lane_space/2))
 # Straight
 sim.create_segment((lane_space/2, intersection_size/2), (lane_space/2, -intersection_size/2))
-sim.create_segment((intersection_size/2, -lane_space/2), (-intersection_size/2, -lane_space/2))
+# sim.create_segment((intersection_size/2, -lane_space/2), (-intersection_size/2, -lane_space/2))
 sim.create_segment((-lane_space/2, -intersection_size/2), (-lane_space/2, intersection_size/2))
-sim.create_segment((-intersection_size/2, lane_space/2), (intersection_size/2, lane_space/2))
+# sim.create_segment((-intersection_size/2, lane_space/2), (intersection_size/2, lane_space/2))
 # Right turn
 sim.create_quadratic_bezier_curve((lane_space/2, intersection_size/2), (lane_space/2, lane_space/2), (intersection_size/2, lane_space/2))
 sim.create_quadratic_bezier_curve((intersection_size/2, -lane_space/2), (lane_space/2, -lane_space/2), (lane_space/2, -intersection_size/2))
-sim.create_quadratic_bezier_curve((-lane_space/2, -intersection_size/2), (-lane_space/2, -lane_space/2), (-intersection_size/2, -lane_space/2))
-sim.create_quadratic_bezier_curve((-intersection_size/2, lane_space/2), (-lane_space/2, lane_space/2), (-lane_space/2, intersection_size/2))
+# sim.create_quadratic_bezier_curve((-lane_space/2, -intersection_size/2), (-lane_space/2, -lane_space/2), (-intersection_size/2, -lane_space/2))
+# sim.create_quadratic_bezier_curve((-intersection_size/2, lane_space/2), (-lane_space/2, lane_space/2), (-lane_space/2, intersection_size/2))
 # Left turn
-sim.create_quadratic_bezier_curve((lane_space/2, intersection_size/2), (lane_space/2, -lane_space/2), (-intersection_size/2, -lane_space/2))
+# sim.create_quadratic_bezier_curve((lane_space/2, intersection_size/2), (lane_space/2, -lane_space/2), (-intersection_size/2, -lane_space/2))
 sim.create_quadratic_bezier_curve((intersection_size/2, -lane_space/2), (-lane_space/2, -lane_space/2), (-lane_space/2, intersection_size/2))
 sim.create_quadratic_bezier_curve((-lane_space/2, -intersection_size/2), (-lane_space/2, lane_space/2), (intersection_size/2, lane_space/2))
-sim.create_quadratic_bezier_curve((-intersection_size/2, lane_space/2), (lane_space/2, lane_space/2), (lane_space/2, -intersection_size/2))
+# sim.create_quadratic_bezier_curve((-intersection_size/2, lane_space/2), (lane_space/2, lane_space/2), (lane_space/2, -intersection_size/2))
 
 # sim.create_quadratic_bezier_curve((lane_space/2, -length-intersection_size/2), (lane_space/2 , -length-intersection_size/2 - 20), (lane_space/2 + 20, -length-intersection_size/2 - 20))
 # sim.create_segment((lane_space/2 + 20, -length-intersection_size/2 - 20), (lane_space/2 + 100, -length-intersection_size/2 - 20))
@@ -47,47 +47,37 @@ sim.create_quadratic_bezier_curve((-intersection_size/2, lane_space/2), (lane_sp
 #     })
 # sim.add_vehicle_generator(vg)
 
-sim.create_signal([[0], [1], [2], [3]])
 
-sim.connect_segment(0, [8, 12, 16])
-sim.connect_segment(1, [9, 13, 17])
-sim.connect_segment(2, [10, 14, 18])
-sim.connect_segment(3, [11, 15, 19])
-sim.connect_segment(4, [0, 1, 2, 3])
-sim.connect_segment(5, [0, 1, 2, 3])
-sim.connect_segment(6, [0, 1, 2, 3])
-sim.connect_segment(7, [0, 1, 2, 3])
-sim.connect_segment(8, [6])
-sim.connect_segment(9, [7])
-sim.connect_segment(10, [4])
-sim.connect_segment(11, [5])
-sim.connect_segment(12, [5])
-sim.connect_segment(13, [6])
-sim.connect_segment(14, [7])
-sim.connect_segment(15, [4])
-sim.connect_segment(16, [7])
-sim.connect_segment(17, [4])
-sim.connect_segment(18, [5])
-sim.connect_segment(19, [6])\
+sim.connect_segment(0, [6, 8])
+sim.connect_segment(1, [9, 10])
+sim.connect_segment(2, [7, 11])
+sim.connect_segment(3, [0, 1, 2]) 
+sim.connect_segment(4, [0, 1, 2])
+sim.connect_segment(5, [0, 1, 2])
+sim.connect_segment(6, [5])
+sim.connect_segment(7, [3])
+sim.connect_segment(8, [4])
+sim.connect_segment(9, [5])
+sim.connect_segment(10, [3])
+sim.connect_segment(11, [4])
 
-sim.set_spawnable_segments([0, 1, 2, 3])
+sim.set_spawnable_segments([0, 1, 2])
+sim.create_signal([[0], [1], [2]])
 
 
-
-      
-# v = Vehicle({'path': [3]})
+# v = Vehicle({'path': [0], 'x': 20, 'v':16.6})
 # sim.add_vehicle(v)
 
-# v = Vehicle({'path': [2]})
+# v = Vehicle({'path': [6, 20, 21, 22, 23, 24, 1, 13], 'x': 20, 'v':16.6})
 # sim.add_vehicle(v)
 
-# v = Vehicle({'path': [1]})
+# v = Vehicle({'path': [ 21, 22, 23, 24, 1, 13, 6, 20], 'x': 20, 'v':16.6})
 # sim.add_vehicle(v)
 
-# v = Vehicle({'path': [0]})
+# v = Vehicle({'path': [0, 12, 5]})
 # sim.add_vehicle(v)
 
-sim.gen_npc(40, 0.3, 0.7)
+sim.gen_npc(20, 0.5, 0.5)
 
 win = Window(sim)
 win.run()

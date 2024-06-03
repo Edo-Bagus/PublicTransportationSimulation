@@ -2,172 +2,113 @@ from trafficSimulator import *
 
 sim = Simulation()
 
-lane_space = 3.5
-intersection_size = 12
-length = 100
-
-# SOUTH, EAST, NORTH, WEST
-
-
-# sim.create_quadratic_bezier_curve((0, -95), (0, -80), (0, -70))
-
-# jalan menuju lingkaran
-# sim.create_segment((-1, -100), (-1, -50))
-# sim.create_segment((1, -50), (1, -100))
-# 
-# Lingkaran tengah -> jalan satu arah
-# sim.create_quadratic_bezier_curve((0, -50), (-50, -50), (-50, 0))
-# sim.create_quadratic_bezier_curve((-50, 0), (-50, 50), (0, 50))
-# sim.create_quadratic_bezier_curve((0, 50), (50, 50), (50, 0))
-# sim.create_quadratic_bezier_curve((50, 0), (50, -50), (0, -50))
-# 
-# Jalur keluar lingkaran -> kanan
-# sim.create_segment((50, -1), (100, -1))
-# sim.create_segment((100, 1), (50, 1))
-# 
-# sim.create_segment((-99, -100), (-99, 0))
-# sim.create_segment((-101, 0), (-101, -100))
-# 
-# Jalan keluar lingkaran -> kiri
-# sim.create_segment((-100, -1), (-50, -1))
-# sim.create_segment((-50, 1), (-100, 1))
-# 
-# sim.create_segment((-99, 0), (-99, 50))
-# sim.create_segment((-101, 50), (-101, 0))
-# 
-# sim.create_segment((-50, 101), (0, 101))
-# sim.create_segment((0, 99), (-50, 99))
-# 
-# Jalan keluar lingkaran -> bawah
-# sim.create_segment((1, 100), (1, 50))
-# sim.create_segment((-1, 50), (-1, 100))
-
-# sim.create_segment((0, -100), (100, 0))
-# sim.create_segment((0, -100), (100, 0))
-
-# sim.create_segment((0, 101), (100, 101))
-# sim.create_segment((100, 99), (0, 99))
-# 
-# sim.create_segment((99, 100), (99, 0))
-# sim.create_segment((101, 0), (101, 100))
-
 # belah ketupat
-sim.create_segment((-95, 60), (-60, 95))
-sim.create_quadratic_bezier_curve((-60, 95), (-55, 100), (-60, 105))
-sim.create_segment((-60, 105), (-95, 140))
-sim.create_quadratic_bezier_curve((-95, 140), (-100, 145), (-105, 140))
-sim.create_segment((-105, 140), (-140, 105))
-sim.create_quadratic_bezier_curve((-140, 105), (-145, 100), (-140, 95))
-sim.create_segment((-140, 95), (-105, 60))
-sim.create_quadratic_bezier_curve((-105, 60), (-100, 55), (-95, 60))
+sim.create_segment((-95, 110), (-10, 145))
+sim.create_quadratic_bezier_curve((-10, 145), (-5, 150), (-10, 155))
+sim.create_segment((-10, 155), (-95, 240))
+sim.create_quadratic_bezier_curve((-95, 240), (-100, 245), (-105, 240))
+sim.create_segment((-105, 240), (-190, 155))
+sim.create_quadratic_bezier_curve((-190, 155), (-195, 150), (-190, 145))
+sim.create_segment((-190, 145), (-105, 110))
+sim.create_quadratic_bezier_curve((-105, 110), (-100, 105), (-95, 110))
 
-sim.create_segment((-90, 145), (-55, 110))
-sim.create_quadratic_bezier_curve((-55, 110), (-45, 100), (-55, 90))
-sim.create_segment((-55, 90), (-90, 55))
-sim.create_quadratic_bezier_curve((-90, 55), (-100, 45), (-110, 55))
-sim.create_segment ((-110, 55), (-145, 90) )
-sim.create_quadratic_bezier_curve((-145, 90), (-155, 100), (-145, 110))
-sim.create_segment((-145, 110), (-110, 145))
-sim.create_quadratic_bezier_curve((-110, 145),(-100, 155), (-90, 145))
-
-
+sim.create_segment((-90, 245), (-5, 160))
+sim.create_quadratic_bezier_curve((-5, 160), (5, 150), (-5, 140))
+sim.create_segment((-5, 140), (-90, 105))
+sim.create_quadratic_bezier_curve((-90, 105), (-100, 100), (-110, 105))
+sim.create_segment ((-110, 105), (-195, 140) )
+sim.create_quadratic_bezier_curve((-195, 140), (-205, 150), (-195, 160))
+sim.create_segment((-195, 160), (-110, 245))
+sim.create_quadratic_bezier_curve((-110, 245),(-100, 255), (-90, 245))
 
 
+sim.create_quadratic_bezier_curve((-285, -151),(-274, -151),(-274, -140))
 
+sim.create_segment((-285, -149), (-440, -149))
+sim.create_segment((-440, -151), (-285, -151))
+# sim.create_segment((-285, -101), (-265, -101))
 
+# sim.create_quadratic_bezier_curve((-265, -99), (-276, -99), (-274, -90))
 
-# percobaan
-# sim.create_segment((0, -99), (-165, -99))
-# sim.create_segment((-165, -101), (0, -101))
-# sim.create_segment((-165, -99), (-185, -99))
+sim.create_segment((-274, -140), (-274, -10))
+sim.create_segment((-276, -10), (-276, -140))
 
-sim.create_quadratic_bezier_curve((-185, -101),(-174, -101),(-174, -90))
-
-sim.create_segment((-185, -99), (-240, -99))
-sim.create_segment((-240, -101), (-185, -101))
-# sim.create_segment((-185, -101), (-165, -101))
-
-# sim.create_quadratic_bezier_curve((-165, -99), (-176, -99), (-174, -90))
-
-sim.create_segment((-174, -90), (-174, -10))
-sim.create_segment((-176, -10), (-176, -90))
-
-# sim.create_quadratic_bezier_curve((-176, -90), (-176, -101), (-165, -101))
-sim.create_quadratic_bezier_curve((-176, -90), (-176, -99), (-185, -99))
+# sim.create_quadratic_bezier_curve((-276, -90), (-276, -101), (-265, -101))
+sim.create_quadratic_bezier_curve((-276, -140), (-276, -149), (-285, -149))
 
 # ---------
 
 #Jalan pojok kiri
-sim.create_segment((-249, -90), (-249, -10))
-sim.create_segment((-251, -10), (-251, -90))
+sim.create_segment((-449, -140), (-449, -60))
+sim.create_segment((-451, -60), (-451, -140))
 
 #24
-sim.create_quadratic_bezier_curve((-240, -99), (-249, -99), (-249, -90))
-sim.create_quadratic_bezier_curve((-251, -90), (-251, -101), (-240, -101))
+sim.create_quadratic_bezier_curve((-440, -149), (-449, -149), (-449, -140))
+sim.create_quadratic_bezier_curve((-451, -140), (-451, -151), (-440, -151))
 
 #-----------
 
-sim.create_segment((-240, -1), (-185, -1))
-sim.create_segment((-185, 1), (-240, 1))
+sim.create_segment((-440, -51), (-285, -51))
+sim.create_segment((-285, -49), (-440, -49))
 
-sim.create_segment((-165, -1), (-110, -1))
-sim.create_segment((-110, 1), (-165, 1))
+sim.create_segment((-265, -1), (-110, -1))
+sim.create_segment((-110, 1), (-265, 1))
 
-sim.create_segment((-249, 10), (-249, 90))
-sim.create_segment((-251, 90), (-251, 10))
+sim.create_segment((-449, 10), (-449, 140))
+sim.create_segment((-451, 140), (-451, 10))
 
-sim.create_quadratic_bezier_curve((-249, 90), (-249, 99), (-240, 99))
-sim.create_quadratic_bezier_curve((-240, 101), (-251, 101), (-251, 90))
+sim.create_quadratic_bezier_curve((-449, 140), (-449, 149), (-440, 149))
+sim.create_quadratic_bezier_curve((-440, 151), (-451, 151), (-451, 140))
 
-sim.create_quadratic_bezier_curve((-185, -1), (-176, -1), (-176, -10))
+sim.create_quadratic_bezier_curve((-285, -1), (-276, -1), (-276, -10))
 #35
-sim.create_quadratic_bezier_curve((-174, -10), (-174, 1), (-185, 1))
-sim.create_quadratic_bezier_curve((-174, -10), (-174, -1), (-165, -1))
-sim.create_quadratic_bezier_curve((-165, 1), (-176, 1), (-176, -10))
-sim.create_segment((-185, -1), (-165, -1))
-sim. create_segment((-165, 1), (-185, 1))
+sim.create_quadratic_bezier_curve((-274, -10), (-274, 1), (-285, 1))
+sim.create_quadratic_bezier_curve((-274, -10), (-274, -1), (-265, -1))
+sim.create_quadratic_bezier_curve((-265, 1), (-276, 1), (-276, -10))
+sim.create_segment((-285, -1), (-265, -1))
+sim. create_segment((-265, 1), (-285, 1))
 
 #Pertigaan kiri
 #40
-sim.create_quadratic_bezier_curve((-249, -10), (-249, -1), (-240, -1))
-sim.create_quadratic_bezier_curve((-240, 1), (-249, 1), (-249, 10))
-sim.create_quadratic_bezier_curve((-240, 1), (-251, 1), (-251, -10))
-sim.create_quadratic_bezier_curve((-251, 10), (-251, -1), (-240, -1))
-sim.create_segment((-251, 10), (-251, -10))
-sim.create_segment((-249, -10), (-249, 10))
+sim.create_quadratic_bezier_curve((-449, -50), (-449, -51), (-440, -51))
+sim.create_quadratic_bezier_curve((-440, -49), (-449, -49), (-449, -40))
+sim.create_quadratic_bezier_curve((-440, -49), (-451, -49), (-451, -60))
+sim.create_quadratic_bezier_curve((-451, -40), (-451, -51), (-440, -51))
+sim.create_segment((-451, -40), (-451, -60))
+sim.create_segment((-449, -60), (-449, -40))
 
 sim.create_quadratic_bezier_curve((-110, -1), (-99, -1), (-99, 10))
 sim. create_quadratic_bezier_curve((-101, 10), (-101, 1), (-110, 1))
 
-sim.create_segment((-99, 10), (-99, 40))
-sim.create_segment((-101, 40), (-101, 10))
+sim.create_segment((-99, 10), (-99, 90))
+sim.create_segment((-101, 90), (-101, 10))
 
-sim.create_segment((-240, 99), (-160, 99))
-sim.create_segment((-160, 101), (-240, 101))
+sim.create_segment((-440, 149), (-210, 149))
+sim.create_segment((-210, 151), (-440, 151))
 
 #52
-sim.create_quadratic_bezier_curve((-160, 99), (-150, 99), (-140, 95))
-sim.create_quadratic_bezier_curve((-160, 99), (-150, 99), (-145, 110))
-sim.create_quadratic_bezier_curve((-145, 90), (-150, 101), (-160, 101))
+sim.create_quadratic_bezier_curve((-210, 149), (-200, 149), (-190, 145))
+sim.create_quadratic_bezier_curve((-210, 149), (-200, 149), (-195, 160))
+sim.create_quadratic_bezier_curve((-195, 140), (-200, 151), (-210, 151))
 #55
-sim.create_quadratic_bezier_curve((-140, 105), (-150, 101), (-160, 101))
+sim.create_quadratic_bezier_curve((-190, 155), (-200, 151), (-210, 151))
 
-sim.create_quadratic_bezier_curve((-99, 40), (-99, 50), (-95, 60))
-sim.create_quadratic_bezier_curve((-99, 40), (-99, 50), (-110, 55))
+sim.create_quadratic_bezier_curve((-99, 90), (-99, 100), (-95, 110))
+sim.create_quadratic_bezier_curve((-99, 90), (-99, 100), (-110, 105))
 
-sim.create_quadratic_bezier_curve((-105, 60), (-101, 50), (-101, 40))
-sim.create_quadratic_bezier_curve((-90, 55), (-101, 50), (-101, 40))
+sim.create_quadratic_bezier_curve((-105, 110), (-101, 100), (-101, 90))
+sim.create_quadratic_bezier_curve((-90, 105), (-101, 100), (-101, 90))
 
 #60
-sim.create_segment((-260, 101), (-300, 101))
-sim.create_segment((-300, 99), (-260, 99))
-sim.create_quadratic_bezier_curve((-260, 99), (-251, 99), (-251, 90))
-sim.create_segment((-240, 101), (-260, 101))
-sim.create_segment((-260, 99), (-240, 99))
+sim.create_segment((-460, 151), (-500, 151))
+sim.create_segment((-500, 149), (-460, 149))
+sim.create_quadratic_bezier_curve((-460, 149), (-451, 149), (-451, 150))
+sim.create_segment((-440, 151), (-460, 151))
+sim.create_segment((-460, 149), (-440, 149))
 
 #65
-sim.create_quadratic_bezier_curve((-249, 90), (-249, 101), (-260, 101))
-sim.create_segment((-270, -101), (-240, -101))
+sim.create_quadratic_bezier_curve((-449, 140), (-449, 151), (-460, 151))
+sim.create_segment((-470, -151), (-440, -151))
 
 # sim.create_segment((-250, 100), (-250, 200))
 # sim.create_segment((-250, 100), (-250, 200))
@@ -181,24 +122,24 @@ sim.create_segment((-270, -101), (-240, -101))
 # sim.create_segment((-100, 150), (-100, 200))
 # sim.create_segment((-100, 150), (-100, 200))
 
-sim.create_segment((-165, -101), (-110, -101))
-sim.create_segment((-110, -99), (-165, -99))
+sim.create_segment((-265, -151), (-110, -151))
+sim.create_segment((-110, -149), (-265, -149))
 
-sim.create_quadratic_bezier_curve((-176, -90), (-176, -101), (-165, -101))
-sim.create_quadratic_bezier_curve((-165, -99), (-174, -99), (-174, -90))
+sim.create_quadratic_bezier_curve((-276, -140), (-276, -151), (-265, -151))
+sim.create_quadratic_bezier_curve((-265, -149), (-274, -149), (-274, -140))
 
 #71
-sim.create_segment((-165, -99), (-185, -99))
-sim.create_segment((-185, -101), (-165, -101))
+sim.create_segment((-265, -149), (-285, -149))
+sim.create_segment((-285, -151), (-265, -151))
 
-sim.create_quadratic_bezier_curve((-110, -101), (-99, -101), (-99, -90))
-sim.create_quadratic_bezier_curve((-101, -90), (-101, -99), (-110, -99))
+sim.create_quadratic_bezier_curve((-110, -151), (-99, -151), (-99, -140))
+sim.create_quadratic_bezier_curve((-101, -140), (-101, -149), (-110, -149))
 
-sim.create_segment((-99,-90), (-99, -10))
-sim.create_segment((-101, -10), (-101, -90))
+sim.create_segment((-99, -140), (-99, -10))
+sim.create_segment((-101, -10), (-101, -140))
 
-sim.create_segment((-90, -1), (-10, -1))
-sim.create_segment((-10, 1), (-90, 1))
+sim.create_segment((-90, -1), (90, -1))
+sim.create_segment((90, 1), (-90, 1))
 
 sim.create_segment((-99, -10), (-99, 10))
 sim.create_segment((-101, 10), (-101, -10))
@@ -216,24 +157,24 @@ sim.create_segment((-90, 1), (-110, 1))
 sim.create_quadratic_bezier_curve((-110, -1), (-101, -1), (-101, -10))
 sim.create_quadratic_bezier_curve((-101, 10), (-101, -1), (-90, -1))
 
-sim.create_quadratic_bezier_curve((-10, -1), (1, -1), (1, 10))
-sim.create_quadratic_bezier_curve((-1, 10), (-1, 1), (-10, 1))
+sim.create_quadratic_bezier_curve((90, -1), (101, -1), (101, 10))
+sim.create_quadratic_bezier_curve((99, 10), (99, 1), (90, 1))
 
 #91
-sim.create_segment((1, 10), (1, 90))
-sim.create_segment((-1, 90), (-1, 10))
+sim.create_segment((101, 10), (101, 140))
+sim.create_segment((99, 140), (99, 10))
 
-sim.create_quadratic_bezier_curve((1, 90), (1, 101), (-10, 101))
-sim.create_quadratic_bezier_curve((-10, 99), (-1, 99), (-1, 90))
+sim.create_quadratic_bezier_curve((101, 140), (101, 151), (90, 151))
+sim.create_quadratic_bezier_curve((90, 149), (99, 149), (99, 140))
 
-sim.create_segment((-10, 101), (-40, 101))
-sim.create_segment((-40, 99), (-10, 99))
+sim.create_segment((90, 151), (10, 151))
+sim.create_segment((10, 149), (90, 149))
 
-sim.create_quadratic_bezier_curve((-40, 101), (-50, 101), (-55, 90))
-sim.create_quadratic_bezier_curve((-40, 101), (-50, 101), (-60, 105))
+sim.create_quadratic_bezier_curve((10, 151), (0, 151), (-5, 140))
+sim.create_quadratic_bezier_curve((10, 151), (0, 151), (-10, 155))
 
-sim.create_quadratic_bezier_curve((-55, 110), (-50, 99), (-40, 99))
-sim.create_quadratic_bezier_curve((-60, 95), (-50, 99), (-40, 99))
+sim.create_quadratic_bezier_curve((-5, 160), (0, 149), (10, 149))
+sim.create_quadratic_bezier_curve((-10, 145), (0, 149), (10, 149))
 
 sim.connect_segment(0, [1, 100])
 sim.connect_segment(1, [2])
@@ -266,7 +207,7 @@ sim.connect_segment(26, [34, 38])
 sim.connect_segment(27, [41, 42])
 sim.connect_segment(28, [46, 85, 87])
 sim.connect_segment(29, [37, 39])
-sim.connect_segment(30, [32, 65])
+sim.connect_segment(30, [32])
 sim.connect_segment(31, [43, 44])
 sim.connect_segment(32, [50])
 sim.connect_segment(33, [31])
@@ -287,7 +228,7 @@ sim.connect_segment(47, [29])
 sim.connect_segment(48, [56, 57])
 sim.connect_segment(49, [47, 80, 88])
 sim.connect_segment(50, [52, 53])
-sim.connect_segment(51, [33, 63])
+sim.connect_segment(51, [33])
 sim.connect_segment(52, [6])
 sim.connect_segment(53, [14])
 sim.connect_segment(54, [51])
@@ -296,6 +237,7 @@ sim.connect_segment(56, [0])
 sim.connect_segment(57, [12])
 sim.connect_segment(58, [49])
 sim.connect_segment(59, [49])
+sim.connect_segment(60, [66])
 sim.connect_segment(61, [62, 64])
 sim.connect_segment(62, [31])
 sim.connect_segment(63, [60])
@@ -337,7 +279,18 @@ sim.connect_segment(98, [2])
 sim.connect_segment(99, [96])
 sim.connect_segment(100, [96])
 
-vehicle = Vehicle({'path': [0]}) 
+sim.create_signal([[22], [27], [31]])
+sim.create_signal([[18], [68], [20]])
+sim.create_signal([[26], [19], [29]])
+sim.create_signal([[50], [12], [4]])
+sim.create_signal([[10], [6], [48]])
+sim.create_signal([[0], [8], [95]])
+sim.create_signal([[28], [75], [78], [49]])   
+
+# vehicle = Vehicle({'path': [0]}) 
+sim.set_spawnable_segments([17, 18, 67, 68, 75, 76, 20, 19, 23, 22, 31, 30, 50, 51, 26, 27, 28, 29, 49, 48, 77, 78, 92, 91, 96, 95, 0, 10, 12, 6, 14, 4, 8, 2])
+sim.gen_npc(200, 0, 1)
+vehicle = Vehicle({'path': [66, 18, 16, 19, 36, 28, 85, 77, 89, 91, 93, 95, 98, 2, 3, 4, 55, 51, 63, 60], 'is_main': True})
 sim.add_vehicle(vehicle)
 win = Window(sim)
 win.run()

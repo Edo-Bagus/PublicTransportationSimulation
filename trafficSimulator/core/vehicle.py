@@ -22,6 +22,8 @@ class Vehicle:
         self.v_max = 16.6
         self.a_max = 1.44
         self.b_max = 4.61
+        self.is_main = False
+        self.is_finish = False
 
         self.path = []
         self.current_road_index = 0
@@ -47,7 +49,14 @@ class Vehicle:
         # Update acceleration
         alpha = 0
         if lead:
-            delta_x = lead.x - self.x - lead.l
+            if lead.x <= self.x:
+                self.v = 0
+                # self.stop()
+                # delta_x = 0.1
+                # delta_v = 0
+            # else:
+            #     self.unstop()
+            delta_x = lead.x - self.x - lead.l - 2
             delta_v = self.v - lead.v
 
             alpha = (self.s0 + max(0, self.T*self.v + delta_v*self.v/self.sqrt_ab)) / delta_x

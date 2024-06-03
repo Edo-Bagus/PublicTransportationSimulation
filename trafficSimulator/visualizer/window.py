@@ -14,6 +14,10 @@ class Window:
         self.is_dragging = False
         self.old_offset = (0, 0)
         self.zoom_speed = 1
+        self.track_time = 0
+        self.avg_time = 0
+        self.total_time = 0
+        self.cycle = 1
 
         self.setup()
         self.setup_themes()
@@ -83,6 +87,7 @@ class Window:
                 with dpg.group(horizontal=True):
                     dpg.add_button(label="Run", tag="RunStopButton", callback=self.toggle)
                     dpg.add_button(label="Next frame", callback=self.simulation.update)
+                    dpg.add_button(label="Restart", callback=self.restart)
 
                 dpg.add_slider_int(tag="SpeedInput", label="Speed", min_value=1, max_value=100,default_value=1, callback=self.set_speed)
             
@@ -103,6 +108,14 @@ class Window:
                     with dpg.table_row():
                         dpg.add_text("Frame:")
                         dpg.add_text("_", tag="FrameStatus")
+
+                    with dpg.table_row():
+                        dpg.add_text("Time Track:")
+                        dpg.add_text("_", tag="TimeTrackStatus")
+
+                    with dpg.table_row():
+                        dpg.add_text("Average Time Track:")
+                        dpg.add_text("_", tag="AverageTimeTrackStatus")
             
             
             with dpg.collapsing_header(label="Camera Control", default_open=True):
@@ -144,6 +157,8 @@ class Window:
         # Update time and frame text
         dpg.set_value("TimeStatus", f"{self.simulation.t:.2f}s")
         dpg.set_value("FrameStatus", self.simulation.frame_count)
+        dpg.set_value("TimeTrackStatus", self.track_time)
+        dpg.set_value("AverageTimeTrackStatus", self.avg_time)
 
         
 
@@ -273,35 +288,49 @@ class Window:
                     dpg.draw_circle(segment.points[1], 1.5, color=(0, 200, 0), thickness=3.5*self.zoom, parent='Canvas')
                 else:
                     dpg.draw_circle(segment.points[1], 1.5, color=(200, 0, 0), thickness=3.5*self.zoom, parent='Canvas')
-            # dpg.draw_arrow(segment.points[-1], segment.points[-2], thickness=0, size=2, color=(0, 0, 0, 50), parent="Canvas")
+            dpg.draw_arrow(segment.points[-1], segment.points[-2], thickness=0, size=2, color=(0, 0, 0, 50), parent="Canvas")
 
     def draw_vehicles(self):
-        for segment in self.simulation.segments:
-            for vehicle_id in segment.vehicles:
-                vehicle = self.simulation.vehicles[vehicle_id]
-                progress = vehicle.x / segment.get_length()
+        if len(self.simulation.vehicles) != 0:
+            for segment in self.simulation.segments:
+                for vehicle_id in segment.vehicles:
+                    vehicle = self.simulation.vehicles[vehicle_id]
+                    progress = vehicle.x / segment.get_length()
 
-                if progress > 1:
-                    progress = 1
+                    if progress > 1:
+                        progress = 1
 
-                if progress < 0:
-                    progress = 0
+                    if progress < 0:
+                        progress = 0
 
-                position = segment.get_point(progress)
-                heading = segment.get_heading(progress)
+                    position = segment.get_point(progress)
+                    heading = segment.get_heading(progress)
 
-                node = dpg.add_draw_node(parent="Canvas")
-                dpg.draw_line(
-                    (0, 0),
-                    (vehicle.l, 0),
-                    thickness=1.76*self.zoom,
-                    color=(0, 0, 255),
-                    parent=node
-                )
+                    node = dpg.add_draw_node(parent="Canvas")
+                    if vehicle.is_main:
+                        car_color = (0, 255, 0)
+                    else:
+                        car_color = (0, 0, 255)
 
-                translate = dpg.create_translation_matrix(position)
-                rotate = dpg.create_rotation_matrix(heading, [0, 0, 1])
-                dpg.apply_transform(node, translate*rotate)
+                    if vehicle.is_main and vehicle.is_finish:
+                        if self.is_running:
+                            self.track_time = self.simulation.t
+                        self.total_time += self.simulation.t
+                        self.simulation.t = 0
+                        self.avg_time = self.total_time / self.cycle
+                        self.stop()
+
+                    dpg.draw_line(
+                        (0, 0),
+                        (vehicle.l, 0),
+                        thickness=1.76*self.zoom,
+                        color=car_color,
+                        parent=node
+                    )
+
+                    translate = dpg.create_translation_matrix(position)
+                    rotate = dpg.create_rotation_matrix(heading, [0, 0, 1])
+                    dpg.apply_transform(node, translate*rotate)
 
     def apply_transformation(self):
         screen_center = dpg.create_translation_matrix([self.canvas_width/2, self.canvas_height/2, -0.01])
@@ -357,3 +386,10 @@ class Window:
     def toggle(self):
         if self.is_running: self.stop()
         else: self.run()
+    
+    def restart(self):
+        self.stop()
+        # self.simulation.t = 0
+        self.simulation.frame_count = 0
+        self.cycle += 1
+        self.simulation.restart()
