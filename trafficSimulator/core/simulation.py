@@ -64,7 +64,7 @@ class Simulation:
         self.car_proportion = car_proportion
         self.bus_proportion = bus_proportion
         car_count = math.ceil(round(total_people*car_proportion) / 4)
-        bus_count = math.ceil(round(total_people*bus_proportion) / 10)
+        bus_count = math.ceil(round(total_people*bus_proportion) / 25)
         random.shuffle(self.spawnable_segment_indeces)
         veh_l_list = []
         for i in range(car_count):
