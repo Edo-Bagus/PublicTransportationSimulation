@@ -23,7 +23,6 @@ class Simulation:
         self.frame_count = 0
         self.dt = 1/60  
 
-
     def add_vehicle(self, veh):
         self.vehicles[veh.id] = veh
         if veh.is_main:
@@ -65,6 +64,7 @@ class Simulation:
         self.bus_proportion = bus_proportion
         car_count = math.ceil(round(total_people*car_proportion) / 4)
         bus_count = math.ceil(round(total_people*bus_proportion) / 25)
+        # randomize the order for generating npc
         random.shuffle(self.spawnable_segment_indeces)
         veh_l_list = []
         for i in range(car_count):
@@ -76,19 +76,10 @@ class Simulation:
         spawn_margin = 10
         for i in range(car_count + bus_count):
             veh_config = {}
-            # random_segment_index = random.randint(0, len(self.segments) - 1)
-            # random_spawn_x = random.uniform(0, self.segments[random_segment_index].get_length())
-            # if len(self.segments[random_segment_index]) == 0:
-            #     veh_config['x'] = random_spawn_x
-            # else:
-            #     for spawn_choice in self.segments[random_segment_index].chosen_spawn_x:
-            #         if random_spawn_x >= spawn_choice and random_spawn_x <= spawn_choice + 20:
-
             spawn_index = self.spawnable_segment_indeces[segment_index]
             veh_config['path'] = [spawn_index]
             veh_config['v'] = 0
             veh_config['l'] = veh_l_list[i]
-            # spawn_choice = [0, self.segments[random_segment_index].
             veh_config['x'] = self.segments[spawn_index].get_length() - spawn_margin
             veh = Vehicle(veh_config)
             self.add_vehicle(veh)
@@ -97,32 +88,13 @@ class Simulation:
             else:
                 segment_index = 0
                 spawn_margin +=  10 + veh_l_list[i]
-        # self.initial_vehicles = copy.deepcopy(self.vehicles)
-        # print(self.vehicles)
-        # print(self.initial_vehicles)
         
     def restart(self):
-        # self.vehicles = copy.deepcopy(self.initial_vehicles)
-        # random.shuffle(self.spawnable_segment_indeces)
-        # segment_index = 0
-        # spawn_margin = 10
-        # for key in self.vehicles:
-        #     spawn_index = self.spawnable_segment_indeces[segment_index]
-        #     self.vehicles[key].path = [spawn_index]
-        #     self.vehicles[key].x = self.segments[spawn_index].get_length() - spawn_margin
-        #     if segment_index < len(self.spawnable_segment_indeces) - 1:
-        #         segment_index += 1
-        #     else:
-        #         segment_index = 0
-        #         spawn_margin +=  10 + self.vehicles[key].l
         self.vehicles.clear()
         for segment in self.segments:
             segment.vehicles.clear()
         self.gen_npc(self.total_people, self.car_proportion, self.bus_proportion)
         self.add_vehicle(self.main_vehicle)
-
-
-
 
     def create_quadratic_bezier_curve(self, start, control, end):
         cur = QuadraticCurve(start, control, end)
@@ -145,9 +117,6 @@ class Simulation:
 
         for signal in self.traffic_signals:
             signal.update(self)
-            # print(signal.segment[0][0])
-            # signal.segment[0].isTraffic = signal.cycle[0][signal.current_cycle_index]
-
 
         # Update vehicles
         for segment in self.segments:
@@ -155,20 +124,9 @@ class Simulation:
                 self.vehicles[segment.vehicles[0]].update(None, self.dt)
             for i in range(1, len(segment.vehicles)):
                 self.vehicles[segment.vehicles[i]].update(self.vehicles[segment.vehicles[i-1]], self.dt)
-                # Check for traffic signal
-                
-        # for segment in self.segments:
-        #     if len(segment.vehicles) == 0: 
-        #         segment.is_full = False
-        #         continue
-        #     vehicle_id = segment.vehicles[-1]
-        #     vehicle = self.vehicles[vehicle_id]
-        #     if vehicle.x <= 0:
-        #         segment.is_full = True
-        #     else:
-        #         segment.is_full = False
 
-        # Check roads for out of bounds vehicle
+
+        # Update based of traffic
         for segment in self.segments:
             # If road has no vehicles, continue
             if len(segment.vehicles) == 0: continue
@@ -199,23 +157,8 @@ class Simulation:
             # If not
             vehicle_id = segment.vehicles[0]
             vehicle = self.vehicles[vehicle_id]
+            # choose random segment for next path
             next_road_index = random.choice(segment.connected_segments)
-            # If first vehicle is out of road bounds
-            # print('x:', vehicle.x)
-
-            # if self.segments[next_road_index].is_full == False:
-            #     # If traffic signal is green or doesn't exist
-            #     # Then let vehicles pass
-            #     vehicle.unstop()
-            #     for vehicle_id in segment.vehicles:
-            #         vehicle = self.vehicles[vehicle_id]
-            #         vehicle.unslow()
-            # else:
-            # if self.segments[next_road_index].is_full and vehicle.x >= segment.get_length() - segment.slowDistance:
-            #     vehicle.slow(0.4*vehicle._v_max)
-            # if self.segments[next_road_index].is_full and vehicle.x >= segment.get_length() - segment.stopDistance and\
-            #         vehicle.x <= segment.get_length():
-            #     vehicle.stop()
             if vehicle.x >= segment.get_length():
                 
                 # If vehicle has a next road
@@ -228,8 +171,6 @@ class Simulation:
                         vehicle.is_finish = True
                     next_road_index = vehicle.path[vehicle.current_road_index]
 
-                    # Add it to the next road
-                
                 self.segments[next_road_index].vehicles.append(vehicle_id)
                 # Reset vehicle properties
                 vehicle.x = 0

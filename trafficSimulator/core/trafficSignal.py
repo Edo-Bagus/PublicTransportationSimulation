@@ -40,9 +40,6 @@ class TrafficSignal:
     
     def update(self, sim):
         cycle_length = math.ceil(len(self.segment) * 5 / 2)
-        # randomize the cycle length after every cycle
-        # if(sim.t % cycle_length == 0):
-        #     cycle_length = random.randint(1, 40)
         k = (sim.t // cycle_length) % len(self.segment)
         self.current_cycle_index = int(k)
         if(len(self.segment) < len(self.segment)):

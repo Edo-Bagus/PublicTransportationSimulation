@@ -51,11 +51,6 @@ class Vehicle:
         if lead:
             if lead.x <= self.x:
                 self.v = 0
-                # self.stop()
-                # delta_x = 0.1
-                # delta_v = 0
-            # else:
-            #     self.unstop()
             delta_x = lead.x - self.x - lead.l - 2
             delta_v = self.v - lead.v
 

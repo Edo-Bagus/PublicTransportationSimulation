@@ -15,7 +15,6 @@ class Segment(ABC):
         self.stopDistance = 20
         self.has_traffic_signal = False
         self.connected_segments = []
-        # self.is_full = False
 
         self.set_functions()
         
@@ -57,19 +56,6 @@ class Segment(ABC):
             i = self.traffic_signal_group
             return self.traffic_signal.current_cycle[i]
         return True
-
-    # @abstractmethod
-    # def compute_x(self, t):
-    #     pass
-    # @abstractmethod
-    # def compute_y(self, t):
-    #     pass
-    # @abstractmethod
-    # def compute_dx(self, t):
-    #     pass
-    # @abstractmethod
-    # def compute_dy(self, t):
-    #     pass
 
     def abs_f(self, t):
         return sqrt(self.compute_dx(t)**2 + self.compute_dy(t)**2)
@@ -118,23 +104,3 @@ class Segment(ABC):
             if t == 1: break
             else:      a = t
         return normalized_path
-    
-    # def update(self, dt):
-    #     n = len(self.vehicles)
-
-    #     if n > 0:
-    #         # Update first vehicle
-    #         self.vehicles[0].update(None, dt)
-    #         # Update other vehicles
-    #         for i in range(1, n):
-    #             lead = self.vehicles[i-1]
-    #             self.vehicles[i].update(lead, dt)
-
-    #          # Check for traffic signal
-    #         if self.vehicles[0].x >= self.length - 50:
-    #             # Slow vehicles in slowing zone
-    #             self.vehicles[0].slow(self.traffic_signal.slow_factor*self.vehicles[0]._v_max)
-    #         if self.vehicles[0].x >= self.length - self.traffic_signal.stop_distance and\
-    #             self.vehicles[0].x <= self.length - self.traffic_signal.stop_distance / 2:
-    #             # Stop vehicles in the stop zone
-    #             self.vehicles[0].stop()
